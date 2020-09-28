@@ -32,22 +32,34 @@ public class ParcelItemServiceImpl implements ParcelItemService{
 
     @Override
     @Transactional
+    public ParcelItemDto save(ParcelItemDto parcelItemDto) {
+        ParcelItem parcelItem = parcelItemMapper.toEntity(parcelItemDto);
+        return parcelItemMapper.toDto(parcelItemDao.save(parcelItem));
+    }
+
+    @Override
+    @Transactional
+    public List<ParcelItem> getAllEntities() {
+        log.info("Getting all parcelItems");
+        return parcelItemDao.getAll();
+    }
+
+    @Override
+    @Transactional
     public List<ParcelItemDto> getAll() {
-        log.info("Getting all parcelItemDtos");
-        return parcelItemMapper.toDto(parcelItemDao.getAll());
+        return parcelItemMapper.toDto(getAllEntities());
+    }
+
+    @Override
+    public ParcelItem getEntityById(long id) {
+        log.info("Getting parcelItem by id{}", id);
+        return parcelItemDao.getById(id);
     }
 
     @Override
     @Transactional
     public ParcelItemDto getById(long id) {
-        return parcelItemMapper.toDto(parcelItemDao.getById(id));
-    }
-
-    @Override
-    @Transactional
-    public ParcelItemDto save(ParcelItemDto parcelItemDto) {
-        ParcelItem parcelItem = parcelItemMapper.toEntity(parcelItemDto);
-        return parcelItemMapper.toDto(parcelItemDao.save(parcelItem));
+        return parcelItemMapper.toDto(getEntityById(id));
     }
 
     @Override
