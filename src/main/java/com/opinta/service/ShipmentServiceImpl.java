@@ -55,7 +55,7 @@ public class ShipmentServiceImpl implements ShipmentService {
     @Override
     @Transactional
     public Shipment getEntityById(long id) {
-        log.info("Getting postcodePool by id {}", id);
+        log.info("Getting shipment by id {}", id);
         return shipmentDao.getById(id);
     }
 
@@ -118,7 +118,7 @@ public class ShipmentServiceImpl implements ShipmentService {
             log.debug("Can't update shipment. Shipment doesn't exist {}", id);
             return null;
         }
-        target.setPrice(calculatePrice(target));
+        source.setPrice(calculatePrice(source));
         try {
             copyProperties(target, source);
         } catch (Exception e) {
