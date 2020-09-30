@@ -90,7 +90,6 @@ public class ParcelItemServiceImpl implements ParcelItemService{
             log.debug("Can't delete parcelItem. ParcelItem doesn't exist {}", id);
             return  false;
         }
-        parcelItem.setId(id);
         log.info("Deleting parcelItem {}", parcelItem);
         parcelItemDao.delete(parcelItem);
         return true;

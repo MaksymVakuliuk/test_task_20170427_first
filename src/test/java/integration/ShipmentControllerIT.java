@@ -68,11 +68,12 @@ public class ShipmentControllerIT extends BaseControllerIT {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void createClient() throws Exception {
+    public void createShipment() throws Exception {
         // create
         JSONObject jsonObject = testHelper.getJsonObjectFromFile("json/shipment.json");
         jsonObject.put("senderId", (int) testHelper.createClient().getId());
         jsonObject.put("recipientId", (int) testHelper.createClient().getId());
+        jsonObject.put("price", 0);
         String expectedJson = jsonObject.toString();
 
         int newShipmentId =
@@ -118,7 +119,7 @@ public class ShipmentControllerIT extends BaseControllerIT {
         ObjectMapper mapper = new ObjectMapper();
         String actualJson = mapper.writeValueAsString(shipmentDto);
 
-        jsonObject.put("price", 45);
+        jsonObject.put("price", 0);
         expectedJson = jsonObject.toString();
 
         JSONAssert.assertEquals(expectedJson, actualJson, false);
