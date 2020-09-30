@@ -1,6 +1,8 @@
 package integration.helper;
 
+import com.opinta.dto.ParcelItemDto;
 import com.opinta.entity.*;
+import com.opinta.mapper.ParcelMapper;
 import com.opinta.service.*;
 import java.io.File;
 import java.io.FileReader;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class TestHelper {
@@ -40,7 +44,7 @@ public class TestHelper {
 
     public Shipment createShipment() {
         Shipment shipment = new Shipment(createClient(), createClient(),
-                DeliveryType.D2D, 1.0F, 1.0F, new BigDecimal(200), new BigDecimal(30), new BigDecimal(35.2));
+                DeliveryType.D2D, new BigDecimal(30), new BigDecimal(35.2));
         return shipmentService.saveEntity(shipment);
     }
 
