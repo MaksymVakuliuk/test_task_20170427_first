@@ -21,6 +21,7 @@ public class Parcel {
     private BigDecimal declaredPrice;
     private BigDecimal price;
     @OneToMany
+    @JoinColumn(name = "parcel_item_id")
     private List<ParcelItem> parcelItems;
     @ManyToOne
     @JoinColumn(name = "shipment_id")

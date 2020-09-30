@@ -8,6 +8,8 @@ import javax.persistence.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Data
@@ -31,6 +33,7 @@ public class Shipment {
     private String description;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "parcel_id")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Parcel> parcels = new ArrayList<>();
 
     public Shipment(Client sender, Client recipient, DeliveryType deliveryType,

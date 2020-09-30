@@ -56,10 +56,12 @@ public class ParcelServiceImpl implements ParcelService {
             parcelItems.add(parcelItemDao.getById(id));
         }
         parcel.setParcelItems(parcelItems);
+        parcel.setPrice(calculatePrice(parcel));
         parcel = parcelDao.save(parcel);
 
         Shipment byId = shipmentDao.getById(parcelDto.getShipmentId());
         byId.getParcels().add(parcel);
+        byId.setPrice(byId.getPrice().add(parcel.getPrice()));
         shipmentDao.update(byId);
 
         return parcelMapper.toDto(parcel);
@@ -127,9 +129,8 @@ public class ParcelServiceImpl implements ParcelService {
 
     private BigDecimal calculatePrice(Parcel parcel) {
         log.info("Calculating price for parcel {}", parcel);
-        
         Shipment shipment = parcel.getShipment();
-        
+        shipment = shipmentDao.getById(shipment.getId());
         if (shipment == null) {
             return BigDecimal.ZERO;
         }

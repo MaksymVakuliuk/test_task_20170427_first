@@ -158,7 +158,7 @@ public class InitDbService {
         parcelItemsOfParcel = new ArrayList<>();
         parcelItemsOfParcel.add(parcelItemMapper.toEntity(parcelItemsSaved.get(2)));
         parcel = new Parcel(1.0f, 0.15f, 0.1f, 0.01f, new BigDecimal("1"), parcelItemsOfParcel);
-        parcel.setShipment(shipmentMapper.toEntity(shipmentsSaved.get(1)));
+        parcel.setShipment(shipmentMapper.toEntity(shipmentsSaved.get(0)));
         parcels.add(parcel);
         parcelItemsOfParcel = new ArrayList<>();
         parcelItemsOfParcel.add(parcelItemMapper.toEntity(parcelItemsSaved.get(3)));
